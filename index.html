@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>book review</title>
+  <style>
+    input[type="button"] {
+    background-color:#38D1E0;
+    color:black;
+    }
+    body {
+      background-color: #EFE0C0;
+    }
+    
+    div {
+      padding:10px;
+      border: 5px solid #0F358A;
+    }
+  </style>
+  <script>
+    function addItem() {
+      var newItem = document.createElement("div");
+      var star = document.getElementById("star").value;
+      var book_name = document.getElementById("bookName").value;
+      var review = document.getElementById("box").value;
+      var full_review = book_name.concat( "<br>" , star ,"☆","<br>" , review) ;
+      newItem.innerHTML = full_review
+      document.getElementById("list").appendChild(newItem);
+      var paragraph = document.createElement("p");
+      paragraph.innerHTML = ("<br>");
+      document.getElementById("list").appendChild(paragraph);
+      saveList();
+    }
+    
+  function saveList() {
+    localStorage.storedList = document.getElementById("list").innerHTML;
+  }
+  
+  function loadList() {
+    document.getElementById("list").innerHTML = localStorage.storedList;
+  }
+  function clearList() {
+    localStorage.storedList = "";
+    loadList();
+  }
+  
+  </script>
+</head>
+
+<body>
+  <h1>Read and rate</h1>
+  Book name: <input type="text" id="bookName" value="">
+  <br>
+  <br>
+  Star rating: <input type="number" id="star"  min="1" max="5"> out of 5
+  <br>
+  <br>
+  Review: <input type="text" id="box" value="">
+  <br>
+  <br>
+  <input type="button" value="submit review" onclick="addItem();"/>
+  <input type="button" value="clear storage" onclick="clearList();" />
+  <h3>Reviews list:</h3>
+  <p id=list>
+  <script>
+    if(localStorage.storedList) {
+      loadList();
+    }
+  </script>
+</body>
+
+</html>
